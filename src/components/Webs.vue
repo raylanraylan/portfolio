@@ -26,7 +26,7 @@ const currentTab = computed(()=>portfolio.data[currentTabIndex.value])
         </div>
         <div class="webs__tabs">
           <button type="button" class="webs__tab" v-for="data in portfolio.data" href="#" :key="data.id" @click="switchTab" :id="data.id">
-            {{ data.name }} /
+            {{ data.name }}
           </button>
         </div>
       </div>
@@ -45,7 +45,6 @@ const currentTab = computed(()=>portfolio.data[currentTabIndex.value])
 
   &__container{
     display: flex;
-    align-items: end;
     width: 100%;
   }
 
@@ -56,7 +55,10 @@ const currentTab = computed(()=>portfolio.data[currentTabIndex.value])
   }
   
   &__nav{
-    margin-left: $large;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: -50px;
   }
 
   &__text{
@@ -66,8 +68,12 @@ const currentTab = computed(()=>portfolio.data[currentTabIndex.value])
   }
 
   &__description {
-    font-size: $large;
+    font-size: $medium;
     line-height: 1.3;
+  }
+
+  &__technology {
+    font-size: $small;
   }
   
   &__layout{
@@ -84,47 +90,35 @@ const currentTab = computed(()=>portfolio.data[currentTabIndex.value])
       font-size: 48px;
       color:$primary200;
 
-      transition: 1s;
-      &::after{
-          content: '';
-          display: block;
-          opacity: 0;
-          width: 0px;
-          height: 0px;
-          border-radius: 25% 50%;
-          background-color: $primary400;
-          position: absolute;
-         
-          bottom: 0;
-          z-index: -2;
-          transition: 1s;
-        }
+      transition: 1s ease-in-out;
+
       &:hover{
         transform: translate(0,10px);
         color: $primary400;
 
-        &::after{
-          content: '';
-          display: block;
-          opacity: 30%;
-
-          width: 80%;
-          height: 25px;
-          border-radius: 50%;
-          background-color: $primary400;
-        }
       }
     }
   }
 
   &__tabs{
     display: flex;
+    justify-content: end;
+    gap: 12px;
   }
 
   &__tab{
     background: none;
     border: none;
-    padding: 0;
+    border-left: 1px solid white;
+    padding:0 12px;
+    font-size: $medium;
+    color:white;
+    cursor: pointer;
+    transition: 1s ease-in-out;
+
+    &:hover{
+      background-color: white;
+    }
   }
 }
 
