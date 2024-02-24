@@ -13,9 +13,9 @@ const currentTab = computed(()=>portfolio.data[currentTabIndex.value]);
 <template>
   <div class="webs">
     <div class="webs__container">
-      <transition name="slide-fade">
-        <div class="webs__img">{{ currentTab.layoutImage }}</div>
-      </transition>
+        <div class="webs__img">
+          <img :src="currentTab.layoutImage" />
+        </div>
       <div class="webs__nav">
         <div class="webs__text">
           <p class="webs__description">{{ currentTab.description }}</p>
@@ -39,7 +39,7 @@ const currentTab = computed(()=>portfolio.data[currentTabIndex.value]);
 .webs {
   display: flex;
   align-items: center;
-  padding: 50px;
+  padding: 200px;
   height: 100vh;
   backdrop-filter: blur(20px);
   background-color: rgba($primary100,.4);
@@ -51,8 +51,24 @@ const currentTab = computed(()=>portfolio.data[currentTabIndex.value]);
 
   &__img {
     width: 720px;
-    height: 480px;
-    background-color: grey;
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+    border-bottom: 15px solid $primary400;
+    border-left: 15px solid $primary400;
+    box-shadow: -4px 4px 5px 5px $primary500;
+
+
+
+    img{
+      border: 20px solid $primary400;
+      border-top: 18px solid $primary300;
+      border-right: 18px solid $primary300;
+      border-bottom: 5px solid $primary100;
+      border-left: 5px solid $primary100;
+      box-shadow: -5px 5px 0px 0px $primary500;
+      display: block;
+      width: 100%;
+    }
   }
   
   &__nav{
@@ -128,19 +144,4 @@ const currentTab = computed(()=>portfolio.data[currentTabIndex.value]);
     opacity: 100%;
   }
 }
-
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
-}
-
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
-}
-
 </style>
