@@ -3,6 +3,8 @@ import { computed, ref,watch } from 'vue';
 const portfolio = defineProps(['data'])
 const currentTabIndex = ref(1);
 
+
+
 const switchTab = (event)=>{
   currentTabIndex.value = Number(event.currentTarget.id);
 }
@@ -19,7 +21,7 @@ const currentTab = computed(()=>portfolio.data[currentTabIndex.value]);
           </button>
         </div>
       <div class="webs__img">
-        <img :src="currentTab.layoutImage" />
+        <img :src="currentTab.layoutImage" alt="作品預覽"/>
       </div>
       <div class="webs__summary">
         <div class="webs__text">
