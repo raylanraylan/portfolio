@@ -13,22 +13,22 @@ const currentTab = computed(()=>portfolio.data[currentTabIndex.value]);
 <template>
   <div class="webs">
     <div class="webs__container">
-        <div class="webs__img">
-          <img :src="currentTab.layoutImage" />
+      <div class="webs__tabs">
+          <button type="button" class="webs__tab" :class="{ webs__click:currentTabIndex===data.id }" v-for="data in portfolio.data" href="#" :key="data.id" @click="switchTab" :id="data.id">
+            {{ data.name }}
+          </button>
         </div>
-      <div class="webs__nav">
+      <div class="webs__img">
+        <img :src="currentTab.layoutImage" />
+      </div>
+      <div class="webs__summary">
         <div class="webs__text">
           <p class="webs__description">{{ currentTab.description }}</p>
-          <p class="webs__technology" v-for="content in currentTab.technology">{{ content }}</p>
+          <p class="webs__technology">{{ currentTab.technology }}</p>
           <div class="webs__layout">
             <a :href="currentTab.ui" class="webs__ui">UI設計稿</a>
             <a :href="currentTab.demo" class="webs__demo">Demo</a>
           </div>
-        </div>
-        <div class="webs__tabs">
-          <button type="button" class="webs__tab" :class="{ webs__click:currentTabIndex===data.id }" v-for="data in portfolio.data" href="#" :key="data.id" @click="switchTab" :id="data.id">
-            {{ data.name }}
-          </button>
         </div>
       </div>
     </div>
@@ -38,89 +38,41 @@ const currentTab = computed(()=>portfolio.data[currentTabIndex.value]);
 <style lang="scss" scoped>
 .webs {
   display: flex;
-  align-items: center;
-  padding: 200px;
+  justify-content: center;
+  padding: 20px;
   height: 100vh;
   backdrop-filter: blur(20px);
   background-color: rgba($primary100,.4);
 
   &__container{
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-  }
-
-  &__img {
-    width: 720px;
-    border-top: 2px solid white;
-    border-right: 2px solid white;
-    border-bottom: 15px solid $primary400;
-    border-left: 15px solid $primary400;
-    box-shadow: -4px 4px 5px 5px $primary500;
-
-
-
-    img{
-      border: 20px solid $primary400;
-      border-top: 18px solid $primary300;
-      border-right: 18px solid $primary300;
-      border-bottom: 5px solid $primary100;
-      border-left: 5px solid $primary100;
-      box-shadow: -5px 5px 0px 0px $primary500;
-      display: block;
-      width: 100%;
+    
+    @include breakpoint($tablet){
+      width: 50%;
     }
-  }
-  
-  &__nav{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-left: -50px;
-  }
-
-  &__text{
-    display: flex;
-    flex-direction: column;
-    gap:12px;;
-  }
-
-  &__description {
-    font-size: $medium;
-    line-height: 1.3;
-  }
-
-  &__technology {
-    font-size: $small;
-  }
-  
-  &__layout{
-    display: flex;
-    justify-content: end;
-    gap:$large;
-    a {
-      display: inline-block;
-      text-decoration: none;
-      width: fit-content;
-      padding: 10px;
-
-      position: relative;
-      font-size: 48px;
-      color:$primary200;
-
-      transition: 1s ease-in-out;
-
-      &:hover{
-        transform: translate(0,10px);
-        color: $primary400;
-
-      }
+    @include breakpoint($desktop){
+      width: 40%;
     }
   }
 
   &__tabs{
     display: flex;
-    justify-content: end;
+    flex-wrap: wrap;
+    align-self: end;
+    margin-bottom: 12px;
     gap: 12px;
+
+    @include breakpoint($tablet){
+      top:5%
+    }
+
+    @include breakpoint($desktop){
+      top: 1%
+    }
   }
 
   &__tab{
@@ -142,6 +94,71 @@ const currentTab = computed(()=>portfolio.data[currentTabIndex.value]);
   &__click {
     border-left: 24px solid white;
     opacity: 100%;
+  }
+
+  &__img {
+    width: 100%;
+    border: 2px solid $primary400;
+    img{
+      display: block;
+      width: 100%;
+    }
+  }
+  
+  &__summary{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    // @include breakpoint($desktop){
+    //   padding: 200px;
+    //   margin-left: -20px;
+    // }
+  }
+
+  &__text{
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+    color:$primary500;
+  }
+
+  &__description {
+    font-size: $medium;
+    line-height: 1.3;
+  }
+
+  &__technology {
+    font-size: $small;
+  }
+  
+  &__layout{
+    display: flex;
+    justify-content: end;
+    gap:$large;
+    
+    a {
+      display: inline-block;
+      text-decoration: none;
+      width: fit-content;
+      padding: 10px;
+      font-size: 24px;
+
+      position: relative;
+      color:$primary200;
+
+      transition: 1s ease-in-out;
+      @include breakpoint($desktop){
+        font-size: 48px;
+        margin-left: -20px;
+      }
+
+      &:hover{
+        transform: translate(0,10px);
+        color: $primary400;
+
+      }
+    }
   }
 }
 </style>

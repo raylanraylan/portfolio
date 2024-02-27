@@ -7,3 +7,12 @@ $primary500:#311f13;
 $large:24px;
 $medium:18px;
 $small:14px;
+
+$tablet:768px;
+$desktop:1440px;
+
+@mixin breakpoint($min-width){
+    @media (min-width: $min-width){
+        @content;
+    }
+}
